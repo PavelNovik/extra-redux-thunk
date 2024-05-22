@@ -39,9 +39,14 @@ export type GetDecksResponse = {
   maxCardsCount: number;
 }
 
+export type AddDeckResponse = Omit<Deck, 'author' | 'shots'>
+
 
 export const decksAPI = {
   getDecks() {
-    return instance.get<GetDecksResponse>('/v2/decks')
+    return instance.get<GetDecksResponse>('v2/decks')
+  },
+  addDeck(name: string) {
+    return instance.post<AddDeckResponse>('v1/decks', { name: name })
   }
 }
