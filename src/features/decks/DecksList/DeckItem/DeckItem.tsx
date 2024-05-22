@@ -1,4 +1,6 @@
+import { useAppDispatch } from '../../../../app/store'
 import { Deck } from '../../decks-api'
+import { removeDeckTC } from '../../decks-thunks'
 import s from './DeckItem.module.css'
 
 type DeckProps = {
@@ -8,7 +10,10 @@ type DeckProps = {
 const TEST_ACC_NAME = 'Sweety'
 
 export const DeckItem = ({ deck }: DeckProps) => {
+  const dispatch = useAppDispatch()
   const isTestingDeck = deck.author.name === TEST_ACC_NAME
+
+  const onDelete = () => { dispatch(removeDeckTC(deck.id)) }
 
   return (
     <li className={s.item}>
@@ -29,7 +34,7 @@ export const DeckItem = ({ deck }: DeckProps) => {
       {isTestingDeck && (
         <div className={s.buttonBox}>
           <button>update</button>
-          <button>delete</button>
+          <button onClick={onDelete}>delete</button>
         </div>
       )}
     </li>

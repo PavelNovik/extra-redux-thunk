@@ -48,5 +48,8 @@ export const decksAPI = {
   },
   addDeck(name: string) {
     return instance.post<AddDeckResponse>('v1/decks', { name: name })
+  },
+  removeDeck(id: string) {
+    return instance.delete<void>(`v1/decks/${id}`)
   }
 }
